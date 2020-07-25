@@ -1,0 +1,36 @@
+.buttonStyle {
+	-webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+	display : block;
+	width: 120px;
+	line-height: 20px; 
+	padding: 10px 10px;
+	justifyContent : center;
+	border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+	border-radius: 5px;
+	background: linear-gradient(to bottom, #00acee, #0072e0);
+
+	color: #fff;
+    text-rendering: auto;
+	display: inline-block;
+	font: 400 11px system-ui;
+	border-width: 1px;
+}
+
+.buttonStyle:hover {
+  background: #1d49aa;
+}
+
+.buttonStyle:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #cbd6ee;
+}
+
+.buttonHolderStyle {
+	position: absolute;
+    top: 25%;
+    left: 50%;
+	transform: translate(-50%, -50%);
+	
+}
