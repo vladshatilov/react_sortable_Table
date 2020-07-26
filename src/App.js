@@ -6,18 +6,25 @@ import Table from './Table.js'
 import Loader from './Loader/Loader.js';
 import PersonInfo from './PersonInfo/PersonInfo.js'
 import ArraySelected from './ArraySelected/ArraySelected.js'
+import array32 from './array32.json'
+import ReactPaginate from 'react-paginate'
+import _ from 'lodash';
+import SearchBar from './Search/search.js'
+import AddingPerson from './AddingPerson/addingPerson.js'
 
 class App extends React.Component{
 	
 	constructor(props){
 		super(props);
 		this.state = {
-			data:null,
+			data:[],
 			isLoading:false,
 			isArraySelected:false,
 			sort : 'desc',
-			sortKey:'null',
+			sortKey:'id',
 			index :null,
+			currentPage:0,
+			search :'',
 		};
 		
 		this.ppp = [];
@@ -32,16 +39,20 @@ class App extends React.Component{
 						'address.zip':false,
 						'description':false,
 						};
+						
 	}
 	
 	
 	async loadData(url) {
 		const response = await fetch(url)
 		const data = await response.json()
-		this.setState({
+		// const data = array32;
+		// console.log(data);
+		await this.setState({
 			isLoading:false,
 			data : data
 		})
+		await this.onSort(null,'id');
 	}
   
 		
@@ -67,7 +78,7 @@ class App extends React.Component{
 	}	
 	
 	showCharacter = (index) => {
-		this.setState({index})		
+		this.setState({index})
 	}
 	
 	
@@ -78,12 +89,50 @@ class App extends React.Component{
 		})
 		this.loadData(config);
 	}
-  
-  render(){
+	
+	pageChange = ({selected}) => (
+		this.setState({currentPage : selected})
+	)
+	
+	getParsedData(){		
+		const {data, search} = this.state;
+		if (!search) {
+		  return data
+		}
 		
-		const people = this.state.data
+		let temp_value = data.filter(item => {
+			console.log(typeof item['id']);
+			return (
+				item["id"].toString().includes(search.toString()) ||
+				item["firstName"].toLowerCase().includes(search.toLowerCase()) ||
+				item["lastName"].toLowerCase().includes(search.toLowerCase()) ||
+				item["email"].toLowerCase().includes(search.toLowerCase()) ||
+				item["phone"].toString().includes(search.toString())
+			);
+		});
+		return temp_value
+	}
+	
+	onSearch = search => {
+		this.setState({search,currentPage : 0})
+	}
+	
+	setNewPerson = personality => {
+		this.setState({data : [personality,...this.state.data]});
+			// console.log(personality);
+			//setNewPerson = {this.setNewPerson}
+	}
+	
+  render(){
 		if (!this.state.isArraySelected)
 			return (<ArraySelected chooseArray={this.chooseArray} />)
+		
+		const people = this.state.data;
+		const pageSize = 50;
+		
+		const parseData = this.getParsedData();
+		const pageCount = Math.ceil(parseData.length / pageSize);
+		const selectedData = _.chunk(parseData,pageSize)[this.state.currentPage];
 		
 		
 		return(
@@ -93,11 +142,49 @@ class App extends React.Component{
 			
 		}
 		{
+			!this.state.isLoading?
+			<SearchBar onSearch = {this.onSearch} />
+			:null
+		}
+		{
+			!this.state.isLoading
+			?	<AddingPerson setNewPerson = {this.setNewPerson} />
+			:null
+		}		
+		{
+			!this.state.isLoading?
+			this.state.data.length > pageSize
+			? <ReactPaginate
+				previousLabel={'<'}
+				nextLabel={'>'}
+				breakLabel={'...'}
+				breakClassName={'break-me'}
+				pageCount={pageCount}
+				marginPagesDisplayed={1}
+				pageRangeDisplayed={3}
+				onPageChange={this.pageChange}
+				containerClassName={'pagination'}
+				activeClassName={'active'}
+				pageClassName="page-item"
+				pageLinkClassName="page-link"
+				previousClassName="page-item"
+				nextClassName="page-item"
+				previousLinkClassName="page-link"
+				nextLinkClassName="page-link"
+				currPage={this.state.currentPage}
+			/> : null
+			:null
+		}
+		{
 			this.state.isLoading
 			? <Loader />
-			: <Table characterData = {people} onSort = {this.onSort} showCharacter={this.showCharacter} sort = {this.state.sort} sortKey = {this.state.sortKey} />
-				
+			: <React.Fragment>
+			<Table characterData = {selectedData} onSort = {this.onSort} showCharacter={this.showCharacter} sort = {this.state.sort} sortKey = {this.state.sortKey} />
+			</React.Fragment>		
 		}
+		
+		
+		
 		{this.state.index ? <PersonInfo person = {this.state.index} /> : null}
 		</div>
 		
