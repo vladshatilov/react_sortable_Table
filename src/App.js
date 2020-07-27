@@ -44,10 +44,29 @@ class App extends React.Component{
 	
 	
 	async loadData(url) {
-		const response = await fetch(url)
-		const data = await response.json()
+		// const response = await fetch(url)
+		// const data = await response.json()
 		// const data = array32;
 		// console.log(data);
+		
+		
+		const data = await fetch(url)
+		.then((response) => response.json())
+		.catch(err => alert("Сервер недоступен.")) 
+		// .catch(err => alert("Сервер недоступен.")) 
+		// if (data.status >= 300) {
+			// throw new Error('Ответ сети был не ok.');
+		  // }
+		// .then(res => {
+		  // if (res.status >= 300) { // error http status code range
+			// throw new Error(res.status) // throw a error to the catch block
+		  // }
+		  // return res.json();
+		// })
+		// .catch(err => {
+		  // throw new Error(err) // catch and throw to the error of previous `.then` block
+		// })
+		
 		await this.setState({
 			isLoading:false,
 			data : data

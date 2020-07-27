@@ -15,8 +15,12 @@ export default props => {
 				 firstName:document.getElementById('name_input').value,
 				 lastName:document.getElementById('surname_input').value,
 				 email:document.getElementById('email_input').value,
-				 phone:document.getElementById('phone_input').value
-				 
+				 phone:document.getElementById('phone_input').value,
+					address: {streetAddress:'',
+					city:'',
+					state:'',
+					zip:''},
+					description:''
 			 };
 			 props.setNewPerson(keyUser);
 		 }
