@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
 export default props => {
+			//using react hook to perform "state" in non-class module
     const [value, setValue] = useState('')
     const valueChangeHandler = event => {
         setValue(event.target.value)

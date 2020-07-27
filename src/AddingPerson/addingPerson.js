@@ -1,35 +1,39 @@
 import React, {useState} from 'react'
 
+		//check if all inputs are not empty and update it through setNewPerson function
 export default props => {
     const [value, setValue] = useState(0);    
 	const checkIfNotNanAndAddHim = () => {
-		 // event.preventDefault();
+		
 		 if(document.getElementById('id_input').value!=='' &&
-		 document.getElementById('name_input').value!=='' &&
-		 document.getElementById('surname_input').value!=='' &&
-		 document.getElementById('email_input').value!=='' &&
-		 document.getElementById('phone_input').value!==''		 
+			document.getElementById('name_input').value!=='' &&
+			document.getElementById('surname_input').value!=='' &&
+			document.getElementById('email_input').value!=='' &&
+			document.getElementById('phone_input').value!==''		 
 		 ){
-			 let keyUser = {
-				 id:document.getElementById('id_input').value,
-				 firstName:document.getElementById('name_input').value,
-				 lastName:document.getElementById('surname_input').value,
-				 email:document.getElementById('email_input').value,
-				 phone:document.getElementById('phone_input').value,
+			let keyUser = {
+				id:document.getElementById('id_input').value,
+				firstName:document.getElementById('name_input').value,
+				lastName:document.getElementById('surname_input').value,
+				email:document.getElementById('email_input').value,
+				phone:document.getElementById('phone_input').value,
 					address: {streetAddress:'',
 					city:'',
 					state:'',
 					zip:''},
 					description:''
 			 };
-			 props.setNewPerson(keyUser);
-		 }
-		 // props.setNewPerson(document.getElementById('name_input').value);
-		 // console.log(document.getElementById('name_input').value);
-		 
-		 
+			props.setNewPerson(keyUser);
+			
+					//reset
+			document.getElementById('id_input').value ='';
+			document.getElementById('name_input').value ='';
+			document.getElementById('surname_input').value ='';
+			document.getElementById('email_input').value ='';
+			document.getElementById('phone_input').value ='';
+		 }	 
 	 }
-	
+			//show only "Add" button or full form and button to add this person
     return (
 	
 		!value?

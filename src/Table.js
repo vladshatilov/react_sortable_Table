@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import styles from './table.css';
 
+
+		//adding onClick function to perform sorting option and text labeling about sort direction
 const TableHeader = (props) => {
 	return (
 		<thead>
@@ -18,7 +20,7 @@ const TableHeader = (props) => {
 
 
 const TableBody = (props) => {
-	
+			//adding option to each row to show person info through the showCharacter function
 	if (props.characterData != null) {
 		let rows = []
 		{/*props.characterData.map(item =>(
@@ -32,8 +34,6 @@ const TableBody = (props) => {
 					<td> {person.phone}</td>
 				</tr>)
 			}
-		
-	
 	
 	return <tbody>{rows}</tbody>}
 	else { 
@@ -41,40 +41,18 @@ const TableBody = (props) => {
 	return <tbody></tbody>}
 }
 
-
-
-
-const columns = [
-  { key: "id", header: "ID", width: 50 },
-  { key: "firstName", header: "First", width: 120 },
-  { key: "lastName", header: "Last", width: 120 },
-  { key: "email", header: "Email", width: 250 },
-  { key: "phone", header: "Last", width: 220 },
-  { key: "address", header: "Last", width: 220 },
-  { key: "description", header: "Last", width: 420 }
-];
-
-
-
+		//
 const Table = (props) => {
 
-		const {characterData, onSort, showCharacter, sort, sortKey} = props;
+	const {characterData, onSort, showCharacter, sort, sortKey} = props;	
+	return(
+		<table className="fl-table">
+			<TableHeader onSort = {onSort} sort = {sort} sortKey = {sortKey} />
+			<TableBody characterData = {characterData} showCharacter ={showCharacter}/>
+		</table>
 		
-		if (props.characterData != null) {
-			
-		}
-		else {console.log('пусто!')}
-		return(
-			<table className="fl-table">
-				<TableHeader onSort = {onSort} sort = {sort} sortKey = {sortKey} />
-				<TableBody characterData = {characterData} showCharacter ={showCharacter}/>
-			</table>
-				
-				
-			
-			
-		)
-	}
+	)
+}
 
 
 export default Table

@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+		//simple html structure to show person's detail info
 export default ({person}) => {
 return (
 	<div className = 'divPerson'>

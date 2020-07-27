@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './arrayStyle.css'
 
+		//let keyuser choose between two types of array and show two buttons
 export default props => {
 	const array32 = 'http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}';
 	const array1000 = 'http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}';
