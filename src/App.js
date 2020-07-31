@@ -136,6 +136,7 @@ class App extends React.Component{
 			);
 		});
 		
+		
 		// let temp_value = data.map(item => {
 			// // let ch_item = item;
 			
