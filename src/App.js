@@ -135,8 +135,7 @@ class App extends React.Component{
 				item["phone"].toString().includes(search.toString())
 			);
 		});
-		
-		
+				
 		// let temp_value = data.map(item => {
 			// // let ch_item = item;
 			
