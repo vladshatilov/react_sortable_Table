@@ -56,7 +56,7 @@ export default props => {
 					id = "id_input"
 					type="text" 
 					className="button-control"
-					autofocus = "true"
+					autoFocus = "true"
 				/></p>
 			</div>
 			<div id ="columnLike">
@@ -65,7 +65,6 @@ export default props => {
 					id = "name_input"
 					type="text" 
 					className="button-control"
-					autofocus = "true"
 					style={{float:"left"}}
 				/>
 				<input 

@@ -16,6 +16,7 @@ export default props => {
             </div>
             <input 
                 type="text" 
+				placeholder="Type here..."
                 className="form-control"
                 onChange={valueChangeHandler} 
                 value={value}
